@@ -14,28 +14,28 @@ void test_accesseurs()
     Image <uint8_t> im(10,10);
 
     // test des accesseurs () par indice
-    for (int i=0; i<100; i++)
+    for (int i=0; i<im.getSize(); i++)
     {
         im(i)=i;
     }
 
-    for(int i=0; i<100; i++)
+    for(int i=0; i<im.getSize(); i++)
     {
         assert(im(i)==i);
     }
 
     // test des accesseurs () par coordonnées
-    for (int x=0; x<10; x++)
+    for (int y=0; y<im.getDy(); y++)
     {
-        for (int y=0; y<10; y++)
+        for (int x=0; x<im.getDx(); x++)
         {
             im(x,y)=x+y;
         }
     }
 
-     for (int x=0; x<10; x++)
+     for (int y=0; y<im.getDy(); y++)
     {
-        for (int y=0; y<10; y++)
+        for (int x=0; x<im.getDx(); x++)
         {
             assert(im(x,y)==x+y);
         }
