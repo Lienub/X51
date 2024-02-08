@@ -32,7 +32,7 @@ std::vector<int> histogramme(const Image <uint8_t> &image)
     return histo;
 }
 
-Image <uint8_t> etirement_contraste(const Image <uint8_t> &image, int new_min, int new_max)
+Image <uint8_t> etirement_contraste(const Image <uint8_t> &image, uint8_t new_min, uint8_t )
 {
     Image <uint8_t> resultat(image.getDx(), image.getDy());
    
