@@ -80,7 +80,7 @@ M_2=
 ### Masque gaussien
 
 Un masque gaussien est obtenu en discrétisant la fonction gaussienne définie en 2D par :
-$``
+$`
 G_\sigma(x,y)= \frac{1}{2\pi\sigma^2}  e^{{\textstyle -\frac{x^2+y^2}{2\sigma^2}}}
 `$
 
