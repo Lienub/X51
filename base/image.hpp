@@ -126,25 +126,25 @@ void Image<T>::print() const
 template<class T>
 T &Image<T>::operator()(const int &x, const int &y)
 {
-    return pixels[0];
+    return pixels[y * this->dx + x];
 }
 
 template<class T>
 T Image<T>::operator() (const int &x, const int &y) const
 {
-    return pixels[0];
+    return pixels[y * this->dx + x];
 }
 
    
 template<class T>
 T &Image<T>::operator()(const int &i)
 {
-    return pixels[0];
+    return pixels[i];
 }
 
 template<class T>
 T Image<T>::operator() (const int &i) const
 {
-    return pixels[0];
+    return pixels[i];
 }
     

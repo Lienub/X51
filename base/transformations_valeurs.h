@@ -2,6 +2,7 @@
 #define TRANSFORMATIONS_VALEURS_H
 
 #include "image.h"
+#include <cmath>
 
 Image <uint8_t> seuillage(const Image <uint8_t> &image, uint8_t s_min, uint8_t s_max);
 Image <uint8_t> negatif(const Image <uint8_t> &image);
