@@ -22,3 +22,11 @@ Image <double> masque_gaussien( double sigma)
 {
     return Image <double> (1, 1);
 }
+
+
+Image <uint8_t> filtre_median(const Image <uint8_t> &image, int taille_fenetre)
+{
+    Image <uint8_t> resultat(image.getDx(), image.getDy());
+   
+    return resultat;
+}
