@@ -12,4 +12,7 @@ Image <double> convolution(const Image <uint8_t> &image, const Image <double> &m
 
 Image <double> masque_gaussien( double sigma);
 
+Image <uint8_t> filtre_median(const Image <uint8_t> &image, int taille_fenetre);
+
+
 #endif
