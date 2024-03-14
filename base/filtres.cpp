@@ -1,5 +1,6 @@
 #include "filtres.h"
 #include <cmath>
+#include <algorithm>
 
 
 Image<uint8_t> convert_double_to_uint8(const Image<double> &image){
@@ -82,10 +83,32 @@ Image <double> masque_gaussien( double sigma)
     return masque;
 }
 
-
 Image <uint8_t> filtre_median(const Image <uint8_t> &image, int taille_fenetre)
 {
     Image <uint8_t> resultat(image.getDx(), image.getDy());
+
+    // Je parcours l'image
+    for (int i = 0; i < image.getDx(); i++) {
+        for (int j = 0; j < image.getDy(); j++) {
+
+            std::vector<uint8_t> voisins;
+
+            // Je parcours la fenêtre
+            for (int x = i - taille_fenetre / 2; x <= i + taille_fenetre / 2; x++) {
+                for (int y = j - taille_fenetre / 2; y <= j + taille_fenetre / 2; y++) {
+                    // Je vérifie que le voisin est dans l'image et je l'ajoute le cas échéant
+                    if (x >= 0 && x < image.getDx() && y >= 0 && y < image.getDy()) {
+                        voisins.push_back(image(x, y));
+                    }
+                }
+            }
+            
+            // Je trie le vecteur puis je prends la médiane
+            std::sort(voisins.begin(), voisins.end());
+
+            resultat(i, j) = voisins[voisins.size() / 2];
+        }
+    } // On fais ça pour toute l'image
    
     return resultat;
 }
