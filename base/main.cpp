@@ -9,6 +9,7 @@
 #include "transformations_valeurs_rgb.h"
 #include "filtres.h"
 #include "bruit.h"
+#include <iomanip>
 
 
 void test_accesseurs()
@@ -73,9 +74,28 @@ int test_lecture_ecriture(const std::string &filename) {
     return 0;
 }
 
+double computeMSE(Image<uint8_t> image1, Image<uint8_t> image2) {
+    if(image1.getDx() != image2.getDx() || image1.getDy() != image2.getDy()) {
+        std::cout << "Les images doivent être de même dimensions" << std::endl;
+        return -1.0;
+    }
+    
+    double val = 0.0;
+
+    for(int x = 0 ; x < image1.getDx() ; x++) {
+        for (int y = 0 ; y < image1.getDy() ; y++) {
+            val += (image1(x,y) - image2(x,y)) * (image1(x,y) - image2(x,y));
+        }
+    }
+
+    return val / (image1.getDx() * image1.getDy());
+}
+
 
 int main(int argc, const char * argv[]) 
 {
+    srand(time(NULL));
+
     test_lecture_ecriture("../test-images/baboon.ppm");
     std::cout << "Test des accesseurs aux pixels" << std::endl;
     
@@ -103,11 +123,26 @@ int main(int argc, const char * argv[])
     Image<uint8_t> bruit_gauss_30 = bruit_gaussien(img, 30);
     std::cout << " OK" << std::endl;
 
+    std::cout << "Débruitage avec filtre médian de taille 3 pour bruit_imp à 15%:";
+    Image<uint8_t> debruit_3_imp_15 = filtre_median(bruit_imp_15, 3);
+    std::cout << " OK" << std::endl;
+
+    std::cout << "Débruitage avec filtre médian de taille 7 pour bruit_imp à 15%:";
+    Image<uint8_t> debruit_7_imp_15 = filtre_median(bruit_imp_15, 7);
+    std::cout << " OK" << std::endl;
+
     // Ecriture des images
     writePGM(bruit_imp_15, "../res-images/bruit_imp_15.pgm");
     writePGM(bruit_imp_40, "../res-images/bruit_imp_40.pgm");
     writePGM(bruit_gauss_15, "../res-images/bruit_gauss_15.pgm");
     writePGM(bruit_gauss_30, "../res-images/bruit_gauss_30.pgm");
+    writePGM(debruit_3_imp_15, "../res-images/debruit_3_imp_15.pgm");
+    writePGM(debruit_7_imp_15, "../res-images/debruit_7_imp_15.pgm");
+
+    // MSE
+    std::cout << "MSE Bruit :" << std::setprecision (5) << computeMSE(img, bruit_imp_15) << std::endl;
+    std::cout << "MSE Débruité : " << std::setprecision (5) << computeMSE(img, debruit_3_imp_15) << std::endl;
+    std::cout << "Différence entre les deux : " << std::setprecision(5) << computeMSE(bruit_imp_15, debruit_3_imp_15) << std::endl;
 
     return 0;
 }
