@@ -6,11 +6,14 @@ all: main
 io.o: io.cpp image.h image.hpp
 	$(CC) $(CPPFLAGS) -c io.cpp
 
-main: main.o io.o transformations_valeurs.o transformations_valeurs_rgb.o filtres.o
-	$(CC) $(CPPFLAGS) main.o io.o transformations_valeurs.o transformations_valeurs_rgb.o filtres.o -o main
+main: main.o io.o transformations_valeurs.o transformations_valeurs_rgb.o filtres.o bruit.o
+	$(CC) $(CPPFLAGS) main.o io.o transformations_valeurs.o transformations_valeurs_rgb.o filtres.o bruit.o -o main
 
 main.o: main.cpp image.h image.hpp io.h transformations_valeurs.h
 	$(CC) $(CPPFLAGS) -c main.cpp 
+
+bruit.o: bruit.cpp bruit.h
+	$(CC) $(CPPFLAGS) -c bruit.cpp
 
 filtres.o: filtres.cpp filtres.h
 	$(CC) $(CPPFLAGS) -c filtres.cpp
