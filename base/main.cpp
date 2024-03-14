@@ -76,27 +76,38 @@ int test_lecture_ecriture(const std::string &filename) {
 
 int main(int argc, const char * argv[]) 
 {
-    // test_lecture_ecriture("../test-images/baboon.ppm");
-    // std::cout << "Test des accesseurs aux pixels" << std::endl;
+    test_lecture_ecriture("../test-images/baboon.ppm");
+    std::cout << "Test des accesseurs aux pixels" << std::endl;
     
-    // test_accesseurs();
+    test_accesseurs();
 
-    // std::cout << "Test des accesseurs aux pixels OK" << std::endl;
+    std::cout << "Test des accesseurs aux pixels OK" << std::endl;
+
+    // Tests
 
     Image<uint8_t> img = readPGM("../test-images/grumpy.pgm");
-    // std::vector<double> pixels{1.0/16, 2.0/16, 1.0/16, 2.0/16, 4.0/16, 2.0/16, 1.0/16, 2.0/16, 1.0/16};
-    // Image<double> masque(3,3, pixels);
-    Image<double> gauss = masque_gaussien(70);
-    Image<double> conv = convolution(img, gauss);
-    Image<uint8_t> result = convert_double_to_uint8(conv);
-    // Image<uint8_t> result = filtre_median(img, 75);
-    // Image<uint8_t> result = bruit_impulsionnel(img, 0.5);
-    // Image<uint8_t> result = bruit_gaussien(img, 50);
-    // writePGM(seuillage(img, 110, 255), "seuillage.pgm");
-    // writePGM(negatif(img), "negatif.pgm");
-    writePGM(result, "gauss.pgm");
 
+    std::cout << "Test bruit impulsionnel 15% :";
+    Image<uint8_t> bruit_imp_15 = bruit_impulsionnel(img, 0.15);
+    std::cout << " OK" << std::endl;
+
+    std::cout << "Test bruit impulsionnel 40% :";
+    Image<uint8_t> bruit_imp_40 = bruit_impulsionnel(img, 0.4);
+    std::cout << " OK" << std::endl;
     
+    std::cout << "Bruit gaussien moyenne 0 ecart type 15 :";
+    Image<uint8_t> bruit_gauss_15 = bruit_gaussien(img, 15);
+    std::cout << " OK" << std::endl;
+
+    std::cout << "Bruit gaussien moyenne 0 ecart type 30 :";
+    Image<uint8_t> bruit_gauss_30 = bruit_gaussien(img, 30);
+    std::cout << " OK" << std::endl;
+
+    // Ecriture des images
+    writePGM(bruit_imp_15, "../res-images/bruit_imp_15.pgm");
+    writePGM(bruit_imp_40, "../res-images/bruit_imp_40.pgm");
+    writePGM(bruit_gauss_15, "../res-images/bruit_gauss_15.pgm");
+    writePGM(bruit_gauss_30, "../res-images/bruit_gauss_30.pgm");
 
     return 0;
 }
