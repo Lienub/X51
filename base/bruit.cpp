@@ -9,7 +9,7 @@ Image <uint8_t> bruit_impulsionnel(const Image<uint8_t> &img, double p)
         for (int j = 0 ; j < img.getDy() ; j++ ) {
             double pick = (double)rand() / RAND_MAX;
 
-            if (pick > 0 && pick > p) {
+            if (pick > 0 && pick < p) {
                 double r = (double)rand() / RAND_MAX;
                 if(r < 0.5) {
                     res(i,j) = 0;
