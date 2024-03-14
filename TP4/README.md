@@ -173,7 +173,7 @@ Cette étape finale consiste à conserver les points de contour qui vérifient u
 
 Les points dont la valeur est inférieure à $`t_{low}`$ ne sont pas inclus dans le résultat.
 Les points dont la valeur est supérieure à $`t_{high}`$ sont conservés dans le résultat. Ils agissent comme des « graines » dans un algorithme de croissance de régions. 
-Pour chaque point $`p`$ tel que $`G_{max}(p) \geq t_{high}`$, on lance une propagation à partir de ce point $`p`$ de manière à ce que tous les voisins de $`p`$  tels que $`G_{max}(p)\geq t_{low}`$  soient inclus dans le résultat, ainsi que tous les voisins des voisins de $`p`$ qui vérifient ce critère, etc.
+Pour chaque point $`p`$ tel que $`G_{max}(p) \geq t_{high}`$, on lance une propagation à partir de ce point $`p`$ de manière à ce que tous les voisins de $`p`$  tels que $`G_{max}(p) \geq t_{low}`$  soient inclus dans le résultat, ainsi que tous les voisins des voisins de $`p`$ qui vérifient ce critère, etc.
 On appelle ce procédé de seuillage qui utilise un seuil haut et un seuil bas un seuillage par *hystérèse*.
 
 En pratique on va utiliser une file FIFO.
