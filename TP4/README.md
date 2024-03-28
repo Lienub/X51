@@ -236,7 +236,7 @@ et écrit les images suivantes :
 - la magnitude du gradient
 - le résultat final du filtre de Canny
 
-Le programme affiche dans une fenêtre OpenCV le résultat du filtre de Canny et sur la sortie standard les deux seuils calculés par la fonction `computeThresholds`.
+Le programme affiche dans une fenêtre  le résultat du filtre de Canny et sur la sortie standard les deux seuils calculés par la fonction `computeThresholds`.
 
 ### Tests
 
