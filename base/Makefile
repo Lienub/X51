@@ -1,5 +1,5 @@
 CC = g++
-CPPFLAGS = -Wall -Wextra -O3 -std=c++11
+CPPFLAGS = -Wall -Wextra -O3 -static-libstdc++ -std=c++11
 
 all: main
 

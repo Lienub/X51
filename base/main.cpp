@@ -107,6 +107,13 @@ int main(int argc, const char * argv[])
 
     Image<uint8_t> img = readPGM("../test-images/grumpy.pgm");
 
+    std::cout << "Test histogramme : " << std::endl;
+    std::vector<int> histo = histogramme(img);
+    std::cout << " OK" << std::endl;
+
+    std::cout << "Test etirement_contraste : " << std::endl;
+    Image<uint8_t> etiree = etirement_contraste(img, 0, 255);
+
     std::cout << "Test bruit impulsionnel 15% :";
     Image<uint8_t> bruit_imp_15 = bruit_impulsionnel(img, 0.15);
     std::cout << " OK" << std::endl;
@@ -138,8 +145,9 @@ int main(int argc, const char * argv[])
     writePGM(bruit_gauss_30, "../res-images/bruit_gauss_30.pgm");
     writePGM(debruit_3_imp_15, "../res-images/debruit_3_imp_15.pgm");
     writePGM(debruit_7_imp_15, "../res-images/debruit_7_imp_15.pgm");
+    writePGM(etiree, "../res-images/etiree.pgm");
 
-    // MSE
+    // // MSE
     std::cout << "MSE Bruit :" << std::setprecision (5) << computeMSE(img, bruit_imp_15) << std::endl;
     std::cout << "MSE Débruité : " << std::setprecision (5) << computeMSE(img, debruit_3_imp_15) << std::endl;
     std::cout << "Différence entre les deux : " << std::setprecision(5) << computeMSE(bruit_imp_15, debruit_3_imp_15) << std::endl;
